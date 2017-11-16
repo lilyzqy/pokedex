@@ -39652,12 +39652,13 @@ var Root = function Root(_ref) {
     _react2.default.createElement(
       _reactRouterDom.HashRouter,
       null,
-      _react2.default.createElement(_pokemon_index_container2.default, null)
+      _react2.default.createElement(_reactRouterDom.Route, { path: '/', component: _pokemon_index_container2.default })
     )
   );
 };
 
 exports.default = Root;
+// <PokemonIndexContainer />
 
 /***/ }),
 /* 156 */
@@ -41553,6 +41554,10 @@ var _react = __webpack_require__(15);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _pokemon_index_item = __webpack_require__(221);
+
+var _pokemon_index_item2 = _interopRequireDefault(_pokemon_index_item);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -41571,27 +41576,26 @@ var PokemonIndex = function (_React$Component) {
   }
 
   _createClass(PokemonIndex, [{
-    key: "componentDidMount",
+    key: 'componentDidMount',
     value: function componentDidMount() {
       this.props.requestAllPokemon();
     }
   }, {
-    key: "render",
+    key: 'render',
     value: function render() {
       var pokemons = this.props.pokemons;
-      var pokemonIdx = pokemons.map(function (pokemon) {
-        return _react2.default.createElement(
-          "li",
-          { key: pokemon.id },
-          pokemon.name,
-          _react2.default.createElement("img", { className: "pokeimg", src: pokemon.image_url })
-        );
+      var pokemonItems = pokemons.map(function (pokemon) {
+        return _react2.default.createElement(_pokemon_index_item2.default, { key: pokemon.id, pokemon: pokemon });
       });
 
       return _react2.default.createElement(
-        "ol",
-        null,
-        pokemonIdx
+        'section',
+        { className: 'pokedex' },
+        _react2.default.createElement(
+          'ol',
+          null,
+          pokemonItems
+        )
       );
     }
   }]);
@@ -45886,6 +45890,64 @@ var withRouter = function withRouter(Component) {
 };
 
 /* harmony default export */ __webpack_exports__["a"] = (withRouter);
+
+/***/ }),
+/* 221 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(15);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRouterDom = __webpack_require__(195);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var PokemonIndexItem = function (_React$Component) {
+  _inherits(PokemonIndexItem, _React$Component);
+
+  function PokemonIndexItem(props) {
+    _classCallCheck(this, PokemonIndexItem);
+
+    return _possibleConstructorReturn(this, (PokemonIndexItem.__proto__ || Object.getPrototypeOf(PokemonIndexItem)).call(this, props));
+  }
+
+  _createClass(PokemonIndexItem, [{
+    key: 'render',
+    value: function render() {
+      var pokemon = this.props.pokemon;
+      return _react2.default.createElement(
+        'li',
+        null,
+        _react2.default.createElement(
+          _reactRouterDom.Link,
+          { to: '/pokemons/' + pokemon.id },
+          pokemon.name
+        ),
+        _react2.default.createElement('img', { className: 'pokeimg', src: pokemon.image_url })
+      );
+    }
+  }]);
+
+  return PokemonIndexItem;
+}(_react2.default.Component);
+
+exports.default = PokemonIndexItem;
 
 /***/ })
 /******/ ]);
