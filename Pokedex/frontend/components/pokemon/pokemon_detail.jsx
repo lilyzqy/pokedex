@@ -1,4 +1,6 @@
 import React from 'react';
+import ItemDetailContainer from '../items/item_detail_container';
+import {Route} from 'react-router-dom';
 // import Pokemon from './pokemon_index_item';
 
 class PokemonDetail extends React.Component {
@@ -32,8 +34,9 @@ class PokemonDetail extends React.Component {
         <ul>
           <li>Type: {pokemon.poke_type}</li>
           <li>Attack: {pokemon.attack}</li>
-          <li>{pokemon.defense}</li>
+          <li>Defense:{pokemon.defense}</li>
         </ul>
+        <Route path="/pokemon/:pokemonId/item/:itemId" component={ItemDetailContainer} />
       </section>
     );
   }
